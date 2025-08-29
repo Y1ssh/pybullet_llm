@@ -184,7 +184,7 @@ class LLMProviderManager:
     
     def initialize_google(self, api_key: Optional[str] = None) -> Any:
         """
-        Initialize Google Gemini provider.
+        Initialize Google Gemini provider with 2.0 Flash model.
         
         Args:
             api_key: Google API key (optional, uses environment variable if None)
@@ -201,13 +201,14 @@ class LLMProviderManager:
             if not api_key:
                 raise ValueError("Google API key not provided")
             
-            model = os.getenv("LLM_MODEL_GOOGLE", "gemini-1.5-pro")
+            # Use Gemini 2.0 Flash model
+            model = os.getenv("LLM_MODEL_GOOGLE", "gemini-2.0-flash")
             temperature = float(os.getenv("LLM_TEMPERATURE", "0.1"))
             max_tokens = int(os.getenv("MAX_TOKENS", "1000"))
             
             provider = ChatGoogleGenerativeAI(
                 google_api_key=api_key,
-                model=model,
+                model=model,  # This will be "gemini-2.0-flash"
                 temperature=temperature,
                 max_output_tokens=max_tokens
             )
@@ -348,7 +349,10 @@ class LLMProviderManager:
                 "supports_tools": True,
                 "supports_streaming": True,
                 "max_context": 1000000,
-                "supports_vision": True
+                "supports_vision": True,
+                "model_generation": "2.0",
+                "multimodal": True,
+                "real_time_features": True
             })
         
         return capabilities

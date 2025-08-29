@@ -24,7 +24,7 @@ class LLMConfig:
     provider: str = field(default_factory=lambda: os.getenv("DEFAULT_LLM_PROVIDER", "anthropic"))
     anthropic_model: str = field(default_factory=lambda: os.getenv("LLM_MODEL_ANTHROPIC", "claude-3-5-sonnet-20241022"))
     openai_model: str = field(default_factory=lambda: os.getenv("LLM_MODEL_OPENAI", "gpt-4o"))
-    google_model: str = field(default_factory=lambda: os.getenv("LLM_MODEL_GOOGLE", "gemini-1.5-pro"))
+    google_model: str = field(default_factory=lambda: os.getenv("LLM_MODEL_GOOGLE", "gemini-2.0-flash"))
     temperature: float = field(default_factory=lambda: float(os.getenv("LLM_TEMPERATURE", "0.1")))
     max_tokens: int = field(default_factory=lambda: int(os.getenv("MAX_TOKENS", "1000")))
     anthropic_api_key: str = field(default_factory=lambda: os.getenv("ANTHROPIC_API_KEY", ""))

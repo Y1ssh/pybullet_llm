@@ -51,6 +51,10 @@ ANTHROPIC_API_KEY=sk-ant-your-key-here
 OPENAI_API_KEY=sk-your-key-here
 GOOGLE_API_KEY=your-google-gemini-key-here
 
+# LLM Provider Configuration
+DEFAULT_LLM_PROVIDER=anthropic
+LLM_MODEL_GOOGLE=gemini-2.0-flash
+
 # Default settings
 DEFAULT_LLM_PROVIDER=anthropic
 ```
@@ -184,8 +188,9 @@ pybullet_llm_robotics/
 
 ### LLM Provider Management
 - "Switch to OpenAI"
-- "Use Google Gemini"
+- "Use Google Gemini 2.0 Flash"
 - "Compare all providers for this task"
+- "Switch to Gemini 2.0"
 
 ### System Commands
 - "help" - Show available commands
@@ -218,6 +223,14 @@ robot_config.home_position = [0, 0, 0, -1.57, 0, 1.57, 0]
 
 ## 🧪 Testing
 
+### Quick API Test
+Test your Gemini 2.0 Flash integration:
+
+```bash
+python scripts/test_gemini_api.py
+```
+
+### Component Tests
 Run the test suite:
 
 ```bash
@@ -228,7 +241,19 @@ Run specific tests:
 
 ```bash
 python -m pytest tests/test_robot_arm.py -v
-python -m pytest tests/test_llm_integration.py -v
+python examples/basic_demo.py
+python scripts/llm_comparison_demo.py
+```
+
+### LLM Provider Tests
+Test individual providers:
+
+```bash
+# Test with Gemini 2.0 Flash
+python scripts/interactive_chat.py --provider google
+
+# Compare all providers
+python scripts/llm_comparison_demo.py --interactive
 ```
 
 ## 🔍 Troubleshooting
@@ -263,8 +288,8 @@ python interactive_chat.py --log-level DEBUG
 
 1. **Use appropriate LLM providers**:
    - Anthropic Claude: Best for complex reasoning
-   - OpenAI GPT: Balanced performance
-   - Google Gemini: Fast responses
+   - OpenAI GPT: Balanced performance  
+   - Google Gemini 2.0 Flash: Next-gen multimodal with real-time features
 
 2. **Optimize camera settings**:
    ```python
